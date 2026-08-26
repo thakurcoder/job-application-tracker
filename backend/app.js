@@ -19,6 +19,17 @@ const conntedDB = async()=>{
 }
 conntedDB();
 
+// db schema and model 
+const jobSchema = new mongoose.Schema({
+    company:{type:String,required:true},
+    date:{type:Date},
+    message:{type:String, required:true}
+})
+
+const Job = mongoose.model("Job",jobSchema);
+
+
+
 app.get('/',(req,res)=>{
     res.send("hello world")
 });
@@ -26,13 +37,22 @@ app.get('/',(req,res)=>{
 app.post('/api/test',async (req,res)=>{
     try {
         const data = req.body;
-        console.log(data)
+        const newJob = new Job({
+            company:req.body.company,
+            date:req.body.date,
+            message:req.body.message
+        })
+        const saveData = await newJob.save();
+        // const newJob = await Job.create(newJob);
+        console.log(saveData)
         res.status(201).json({"message":"entry created"})                            
         
     } catch (error) {
         console.log(error)
     }
 })
+
+
 
 app.get("/api/test",(req,res)=>{
     const data = [
