@@ -1,19 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from 'axios';
 
 
 const Add = () => {
 
     const [formData, setformData] = useState({company:"",date:"",message:""});
 
+    useEffect(()=>{
+
+    })
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        setformData({
-            company:e.target.company.value,
-            date:e.target.date.value,
-            message:e.target.message.value
-        })
+
+        const newData = {
+          company:e.target.company.value,
+          date:e.target.date.value,
+          message:e.target.message.value
+      }
+        setformData(newData)
         console.log(formData)
+        try {
+            const response = await axios.post('/api/test',newData);
+            console.log("backend response",response.data);
+        } catch (error) {
+            console.log(error)
+        }
     }
+
 
   return (
     <>

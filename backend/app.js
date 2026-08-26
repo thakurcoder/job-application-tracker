@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 dotenv.config();
 
 const app = express();
+app.use(express.json());
 
 
 const uri = process.env.MONGODB_URI;
@@ -21,6 +22,17 @@ conntedDB();
 app.get('/',(req,res)=>{
     res.send("hello world")
 });
+
+app.post('/api/test',async (req,res)=>{
+    try {
+        const data = req.body;
+        console.log(data)
+        res.status(201).json({"message":"entry created"})                            
+        
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 app.get("/api/test",(req,res)=>{
     const data = [
