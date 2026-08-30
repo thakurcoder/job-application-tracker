@@ -54,13 +54,9 @@ app.post('/api/test',async (req,res)=>{
 
 
 
-app.get("/api/test",(req,res)=>{
-    const data = [
-        { "id": 1, "item": "Laptop" },
-        { "id": 2, "item": "Mouse" },
-        { "id": 3, "item": "Keyboard" }
-      ]
-      
+app.get("/api/test", async (req,res)=>{
+    const data = await Job.find()
+    console.log(data)
     res.send(data)
 })
 
