@@ -1,10 +1,12 @@
+import axios from "axios";
 import { useState } from "react";
 
 const Update = ({props}) => {
     // if (!isopen) return null;
 
-    console.log("in updates",props)
-    console.log("company ", props.company)
+    // console.log("in updates",props)
+    // console.log("company ", props.company)
+    console.log("id of props",props._id)
 
     const [updateData,setUpdateData] = useState({
       company:props.company,
@@ -19,11 +21,24 @@ const Update = ({props}) => {
         [name]:value
       }))
     } 
+
+
+    const handleSubmit = async(e)=>{
+      e.preventDefault()
+      
+      try {
+        const response = await axios.patch(`api/test${props._id}`,updateData)
+        console.log(response)
+      } catch (error) {
+        console.log("errror while updating the data :- ",error)
+      }
+      
+    }
     return (
 
       <>
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <form className="flex w-full max-w-md flex-col gap-4 rounded-xl bg-white p-6 shadow-xl">
+          <form onSubmit={handleSubmit} className="flex w-full max-w-md flex-col gap-4 rounded-xl bg-white p-6 shadow-xl">
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-gray-700">Company </label>
               <input 
@@ -60,6 +75,7 @@ const Update = ({props}) => {
               />
             </div>
             <button
+              
               type="submit"
               className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
             >

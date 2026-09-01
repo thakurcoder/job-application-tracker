@@ -60,6 +60,22 @@ app.get("/api/test", async (req,res)=>{
     res.send(data)
 })
 
+app.patch("/api/test:id",async(req,res)=>{
+    console.log("req",req.params.id)
+    console.log("req body",req.body)
+    try {
+        const update = await Job.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            {new:true}
+        );
+        res.json(update)
+    } catch (error) {
+        console.log(error)
+        res.send(500).json({message:"update failed"})
+    }
+})
+
 app.listen(process.env.PORT,()=>{
     console.log("server is running...",process.env.PORT);
 });

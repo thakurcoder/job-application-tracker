@@ -11,7 +11,7 @@ const Home = ()=>{
         const response = await fetch("/api/test");
         const data = await response.json();
         setData(data)
-        console.log(data)
+        console.log("data in home ",data)
     }
 
     useEffect( ()=>{
