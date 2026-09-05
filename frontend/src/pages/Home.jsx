@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Update from "../components/Update";
+import axios from "axios";
 
 const Home = ()=>{
 
@@ -25,6 +26,18 @@ const Home = ()=>{
         console.log(isOpen)
     }
 
+    const handleDelete = async(item)=>{
+      console.log("in delete checking item ",item._id)
+      try {
+        const response = await axios.delete(`/api/test/${item._id}`,item._id)
+        console.log("delete response ",response)
+        fetchData()
+      } catch (error) {
+        console.log(error)
+      }
+      
+    }
+
     return <>
     <div className="rounded-2xl">
         
@@ -42,7 +55,7 @@ const Home = ()=>{
                      <button onClick={()=>handleUpdate(item)} className="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-blue-700 active:bg-blue-800">
                        Update
                      </button>
-                     <button className="rounded-md bg-red-50 px-3 py-1.5 text-sm font-medium text-red-600 transition hover:bg-red-100 active:bg-red-200">
+                     <button onClick={()=>handleDelete(item)} className="rounded-md bg-red-50 px-3 py-1.5 text-sm font-medium text-red-600 transition hover:bg-red-100 active:bg-red-200">
                        Delete
                      </button>
                    </div>

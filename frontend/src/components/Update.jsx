@@ -29,14 +29,12 @@ const Update = ({props,isOpen,isClose}) => {
       e.preventDefault()
       
       try {
-        const response = await axios.patch(`api/test${props._id}`,updateData)
+        const response = await axios.patch(`api/test/${props._id}`,updateData)
         console.log(response) 
         isClose()
       } catch (error) {
         console.log("errror while updating the data :- ",error)
       }
-
-
       
     }
     return (

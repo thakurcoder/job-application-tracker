@@ -44,7 +44,7 @@ app.post('/api/test',async (req,res)=>{
         })
         const saveData = await newJob.save();
         // const newJob = await Job.create(newJob);
-        console.log(saveData)
+        // console.log(saveData)
         res.status(201).json({"message":"entry created"})                            
         
     } catch (error) {
@@ -56,13 +56,13 @@ app.post('/api/test',async (req,res)=>{
 
 app.get("/api/test", async (req,res)=>{
     const data = await Job.find()
-    console.log(data)
+    // console.log(data)
     res.send(data)
 })
 
-app.patch("/api/test:id",async(req,res)=>{
-    console.log("req",req.params.id)
-    console.log("req body",req.body)
+app.patch("/api/test/:id",async(req,res)=>{
+    // console.log("req",req.params.id)
+    // console.log("req body",req.body)
     try {
         const update = await Job.findByIdAndUpdate(
             req.params.id,
@@ -73,6 +73,16 @@ app.patch("/api/test:id",async(req,res)=>{
     } catch (error) {
         console.log(error)
         res.send(500).json({message:"update failed"})
+    }
+})
+
+app.delete("/api/test/:id",async (req,res)=>{
+    console.log("delete req : - ",req.params.id)
+    try {
+        const del = await Job.deleteOne({_id:req.params.id})
+        res.json(del)
+    } catch (error) {
+        console.log(error)
     }
 })
 
