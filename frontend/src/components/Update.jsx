@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 
-const Update = ({props}) => {
+const Update = ({props,isOpen,isClose}) => {
     // if (!isopen) return null;
 
     // console.log("in updates",props)
-    // console.log("company ", props.company)
+    console.log("isopen = ",isOpen )
+    console.log("isopen = ",isClose )
+    console.log("company ", props)
     console.log("id of props",props._id)
 
     const [updateData,setUpdateData] = useState({
@@ -28,10 +30,13 @@ const Update = ({props}) => {
       
       try {
         const response = await axios.patch(`api/test${props._id}`,updateData)
-        console.log(response)
+        console.log(response) 
+        isClose()
       } catch (error) {
         console.log("errror while updating the data :- ",error)
       }
+
+
       
     }
     return (

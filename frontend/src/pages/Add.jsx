@@ -22,6 +22,7 @@ const Add = () => {
         try {
             const response = await axios.post('/api/test',newData);
             console.log("backend response",response.data);
+            
         } catch (error) {
             console.log(error)
         }

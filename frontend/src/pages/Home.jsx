@@ -51,7 +51,7 @@ const Home = ()=>{
             }
             
 
-            {isOpen && <Update props = {updateData} />}
+            {isOpen && <Update isOpen = {isOpen} isClose = {()=>setisOpen(false)} props = {updateData} />}
         </div>
 
     </div>
